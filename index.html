@@ -1,112 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Verification</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #0f0f1a, #1a1033);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification</title>
 
-    .box {
-      background: rgba(28, 28, 40, 0.9);
-      padding: 35px;
-      border-radius: 12px;
-      text-align: center;
-      width: 340px;
-      box-shadow: 0 0 25px rgba(128, 0, 255, 0.2);
-      backdrop-filter: blur(10px);
-    }
+<style>
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto;
+  background: radial-gradient(circle at top, #1a1033, #0b0b14);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #e5e7eb;
+}
 
-    button {
-      padding: 12px;
-      background: linear-gradient(135deg, #7b2cff, #a855f7);
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      margin-top: 10px;
-    }
+.box {
+  background: rgba(20, 20, 30, 0.9);
+  border-radius: 16px;
+  width: 92%;
+  max-width: 360px;
+  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.25);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  animation: fadeIn 0.4s ease;
+}
 
-    .captcha {
-      display: none;
-      margin-top: 20px;
-      background: #151526;
-      padding: 12px;
-      border-radius: 8px;
-      text-align: left;
-    }
+/* HEADER */
+.header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
+  text-align: left;
+}
 
-    .loading {
-      display: none;
-      margin-top: 20px;
-      text-align: center;
-    }
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .spinner {
-      border: 4px solid #2a2a40;
-      border-top: 4px solid #a855f7;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      animation: spin 1s linear infinite;
-      margin: 10px auto;
-    }
+/* CONTENT */
+.content {
+  padding: 22px;
+  text-align: center;
+}
 
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
+h2 {
+  margin: 0 0 6px;
+  font-weight: 600;
+}
 
-    .popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #1c1c2b;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      width: 300px;
-      box-shadow: 0 0 30px rgba(128, 0, 255, 0.3);
-    }
+.sub {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 18px;
+}
 
-    input[type="checkbox"] {
-      accent-color: #a855f7;
-    }
-  </style>
+button {
+  padding: 12px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  width: 100%;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.captcha {
+  display: none;
+  margin-top: 18px;
+  background: #151526;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 14px;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.loading {
+  display: none;
+  margin-top: 20px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #2a2a40;
+  border-top: 3px solid #a855f7;
+  border-radius: 50%;
+  margin: 12px auto;
+  animation: spin 0.8s linear infinite;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: #141420;
+  padding: 22px;
+  border-radius: 14px;
+  width: 85%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+  animation: scaleIn 0.25s ease;
+}
+
+.popup-content p {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.15);
+  margin-right: 8px;
+  accent-color: #a855f7;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes scaleIn {
+  from {transform: scale(0.95); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+</style>
 </head>
+
 <body>
 
 <div class="box">
-  <h2>Verification Required</h2>
-  <button onclick="start()">Verify Here</button>
 
-  <div class="captcha" id="captcha">
-    <label>
-      <input type="checkbox" id="check"> I'm not a robot
-    </label>
-    <button onclick="verify()">Continue</button>
+  <div class="header">
+    <div class="logo">RoVer</div>
   </div>
 
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <p>Verifying...</p>
+  <div class="content">
+    <h2>Security Check</h2>
+    <div class="sub">Please verify to continue</div>
+
+    <button onclick="start()">Start Verification</button>
+
+    <div class="captcha" id="captcha">
+      <label>
+        <input type="checkbox" id="check">
+        I'm not a robot
+      </label>
+      <button onclick="verify()">Continue</button>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div class="sub">Checking...</div>
+    </div>
   </div>
+
 </div>
 
 <div class="popup" id="popup">
-  <h3>Verification Complete</h3>
-  <p>Continue to proceed.</p>
-  <button onclick="redirect()">Continue to Verification</button>
+  <div class="popup-content">
+    <h3>Verification Complete</h3>
+    <p>You may continue to verify your account.</p>
+    <button onclick="redirect()">Continue</button>
+  </div>
 </div>
 
 <script>
@@ -123,11 +205,11 @@ function verify() {
   document.getElementById("captcha").style.display = "none";
   document.getElementById("loading").style.display = "block";
 
-  let time = Math.floor(Math.random() * 4000) + 4000;
+  let time = Math.floor(Math.random() * 2000) + 1500;
 
   setTimeout(() => {
     document.getElementById("loading").style.display = "none";
-    document.getElementById("popup").style.display = "block";
+    document.getElementById("popup").style.display = "flex";
   }, time);
 }
 
